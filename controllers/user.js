@@ -6,19 +6,21 @@ module.exports = function (app) {
     var controller = {};
 
     controller.findById = function (req, res) {
-        User.findById(req.params._id, function (err, user) {
-            if (err) {
-                res.status(500).json(err);
-            } else {
-                if (user) {
-                    res.status(200).json(user);
+        User.findById(req.params._id)
+            .populate("adresses")
+            .exec(function (err, user) {
+                if (err) {
+                    res.status(500).json(err);
                 } else {
-                    res.status(404).json({
-                        error: "User not found."
-                    });
+                    if (user) {
+                        res.status(200).json(user);
+                    } else {
+                        res.status(404).json({
+                            error: "User not found."
+                        });
+                    }
                 }
-            }
-        });
+            });
     };
 
     controller.save = function (req, res) {
@@ -27,7 +29,12 @@ module.exports = function (app) {
         var data = {
             email: req.body.email,
             password: encryption.encrypt(req.body.password),
-            fullname: req.body.fullname
+            fullname: req.body.fullname,
+            nif: req.body.nif,
+            phone: req.body.phone,
+            gender: req.body.gender,
+            birth: req.body.birth,
+            adresses: req.body.adresses
         };
 
         if (_id) {
