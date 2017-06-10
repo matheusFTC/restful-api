@@ -29,7 +29,8 @@ module.exports = function () {
         },
         gender: {
             type: String,
-            required: true
+            required: true,
+            enum: ["M", "F"]
         },
         birth: {
             type: Date
