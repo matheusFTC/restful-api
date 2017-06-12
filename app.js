@@ -15,4 +15,4 @@ process.on("SIGINT", function () {
     });
 });
 
-app.listen(80);
+app.listen(app.get("port"));
