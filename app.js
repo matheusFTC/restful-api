@@ -15,4 +15,4 @@ process.on("SIGINT", function () {
     });
 });
 
-app.listen(app.get("port"));
+app.listen(process.env.PORT || 8000);
