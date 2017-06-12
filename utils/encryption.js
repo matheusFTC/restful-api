@@ -9,21 +9,29 @@ module.exports = function (app) {
     var encryption = {};
 
     encryption.encrypt = function (value) {
-        var cipher = crypto.createCipher(algorithm, secret);
-        var crypted = cipher.update(value, inputEncoding, outputEncoding);
+        if (value) {
+            var cipher = crypto.createCipher(algorithm, secret);
+            var crypted = cipher.update(value, inputEncoding, outputEncoding);
 
-        crypted += cipher.final(outputEncoding);
+            crypted += cipher.final(outputEncoding);
 
-        return crypted;
+            return crypted;
+        } else {
+            return null;
+        }
     };
 
     encryption.decrypt = function (value) {
-        var decipher = crypto.createDecipher(algorithm, secret);
-        var decrypted = decipher.update(value, outputEncoding, inputEncoding);
+        if (value) {
+            var decipher = crypto.createDecipher(algorithm, secret);
+            var decrypted = decipher.update(value, outputEncoding, inputEncoding);
 
-        decrypted += decipher.final(inputEncoding);
+            decrypted += decipher.final(inputEncoding);
 
-        return decrypted;
+            return decrypted;
+        } else {
+            return null;
+        }
     };
 
     return encryption;
