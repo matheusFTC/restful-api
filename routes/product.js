@@ -1,5 +1,5 @@
 module.exports = function (app) {
-    var controller = app.controllers.user;
+    var controller = app.controllers.product;
     var validate = app.controllers.authentication.validate;
 
     app.route("/products")
