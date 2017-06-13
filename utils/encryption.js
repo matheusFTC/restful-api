@@ -1,10 +1,10 @@
 var crypto = require("crypto");
 
 module.exports = function (app) {
-    const algorithm = "aes-256-ctr";
-    const secret = "eyJ0eeyJ0eXAiOiJeyJ0eeyJ0eXAiOiJKV1XAiOiJKV1KV1XAiOiJKV1JeyJ0eeyJ0eXAiOiJKV";
-    const inputEncoding = "utf8";
-    const outputEncoding = "hex";
+    const algorithm = app.parameters.encryption.algorithm;
+    const secret = app.parameters.encryption.secret;
+    const inputEncoding = app.parameters.encryption.inputEncoding;
+    const outputEncoding = app.parameters.encryption.outputEncoding;
 
     var encryption = {};
 

@@ -1,13 +1,7 @@
 var app = require("./configurations/express");
 var mongoose = require("./configurations/mongoose");
 
-mongoose.connect("mongodb://@ds119772.mlab.com:19772/restful-api", {
-    server: {
-        poolSize: 5
-    },
-    user: "root",
-    pass: "root"
-});
+mongoose.connect(app.parameters.database.url, app.parameters.database.options);
 
 process.on("SIGINT", function () {
     mongoose.connection.close(function () {
@@ -15,4 +9,4 @@ process.on("SIGINT", function () {
     });
 });
 
-app.listen(process.env.PORT || 8000);
+app.listen(process.env.PORT || app.parameters.infrastructure.port);

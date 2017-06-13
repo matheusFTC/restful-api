@@ -14,6 +14,7 @@ app.use(methodOverride());
 app.disable("x-powered-by");
 
 load("utils")
+    .then("parameters")
     .then("models")
     .then("controllers")
     .then("routes")

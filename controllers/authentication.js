@@ -2,9 +2,9 @@ var jwt = require("jwt-simple");
 var moment = require("moment");
 
 module.exports = function (app) {
-    const secret = "eyJ0eeyJ0eXAiOiJeyJ0eeyJ0eXAiOiJKV1XAiOiJKV1KV1XAiOiJKV1JeyJ0eeyJ0eXAiOiJKV";
-    const amount = 1;
-    const duration = "days";
+    const secret = app.parameters.authentication.secret;
+  const amount = app.parameters.authentication.amount;
+  const duration = app.parameters.authentication.duration;
 
     var encryption = app.utils.encryption;
 
