@@ -1,4 +1,4 @@
-var crypto = require("crypto");
+let crypto = require("crypto");
 
 module.exports = function (app) {
     const algorithm = app.parameters.encryption.algorithm;
@@ -6,12 +6,12 @@ module.exports = function (app) {
     const inputEncoding = app.parameters.encryption.inputEncoding;
     const outputEncoding = app.parameters.encryption.outputEncoding;
 
-    var encryption = {};
+    let encryption = {};
 
     encryption.encrypt = function (value) {
         if (value) {
-            var cipher = crypto.createCipher(algorithm, secret);
-            var crypted = cipher.update(value, inputEncoding, outputEncoding);
+            let cipher = crypto.createCipher(algorithm, secret);
+            let crypted = cipher.update(value, inputEncoding, outputEncoding);
 
             crypted += cipher.final(outputEncoding);
 
@@ -23,8 +23,8 @@ module.exports = function (app) {
 
     encryption.decrypt = function (value) {
         if (value) {
-            var decipher = crypto.createDecipher(algorithm, secret);
-            var decrypted = decipher.update(value, outputEncoding, inputEncoding);
+            let decipher = crypto.createDecipher(algorithm, secret);
+            let decrypted = decipher.update(value, outputEncoding, inputEncoding);
 
             decrypted += decipher.final(inputEncoding);
 

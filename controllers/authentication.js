@@ -1,26 +1,26 @@
-var jwt = require("jwt-simple");
-var moment = require("moment");
+let jwt = require("jwt-simple");
+let moment = require("moment");
 
 module.exports = function (app) {
     const secret = app.parameters.authentication.secret;
-  const amount = app.parameters.authentication.amount;
-  const duration = app.parameters.authentication.duration;
+    const amount = app.parameters.authentication.amount;
+    const duration = app.parameters.authentication.duration;
 
-    var encryption = app.utils.encryption;
+    let encryption = app.utils.encryption;
 
-    var User = app.models.user;
+    let User = app.models.user;
 
-    var controller = {};
+    let controller = {};
 
     controller.authenticate = function (req, res) {
         User.findOne({
             "email": req.body.email,
             "password": encryption.encrypt(req.body.password)
-        }, function (err, user) {
+        }).then(function (user) {
             if (user) {
-                var expires = moment().add(amount, duration).valueOf();
+                let expires = moment().add(amount, duration).valueOf();
 
-                var token = jwt.encode({
+                let token = jwt.encode({
                     iss: user._id,
                     exp: expires
                 }, secret);
@@ -34,15 +34,17 @@ module.exports = function (app) {
                     error: "Unauthorized."
                 });
             }
+        }).catch(function (err) {
+            res.status(500).json(err);
         });
     };
 
     controller.validate = function (req, res, next) {
-        var token = req.body.token || req.query.token || req.headers["x-access-token"];
+        let token = req.body.token || req.query.token || req.headers["x-access-token"];
 
         if (token) {
             try {
-                var decoded = jwt.decode(token, secret);
+                let decoded = jwt.decode(token, secret);
 
                 if (decoded.exp <= Date.now()) {
                     res.status(401).json({
@@ -51,7 +53,7 @@ module.exports = function (app) {
                 } else {
                     User.findById({
                         "_id": decoded.iss
-                    }, function (err, user) {
+                    }).then(function (user) {
                         if (user) {
                             next();
                         } else {
@@ -59,6 +61,8 @@ module.exports = function (app) {
                                 error: "Unauthorized."
                             });
                         }
+                    }).catch(function (err) {
+                        res.status(500).json(err);
                     });
                 }
             } catch (err) {
