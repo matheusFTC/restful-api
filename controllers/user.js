@@ -1,32 +1,32 @@
 module.exports = function (app) {
-    var encryption = app.utils.encryption;
+    let encryption = app.utils.encryption;
 
-    var User = app.models.user;
+    let User = app.models.user;
 
-    var controller = {};
+    let controller = {};
 
     controller.findById = function (req, res) {
         User.findById(req.params._id)
             .populate("adresses")
-            .exec(function (err, user) {
-                if (err) {
-                    res.status(500).json(err);
+            .exec()
+            .then(function (user) {
+                if (user) {
+                    res.status(200).json(user);
                 } else {
-                    if (user) {
-                        res.status(200).json(user);
-                    } else {
-                        res.status(404).json({
-                            error: "User not found."
-                        });
-                    }
+                    res.status(404).json({
+                        error: "User not found."
+                    });
                 }
+            })
+            .catch(function (err) {
+                res.status(500).json(err);
             });
     };
 
     controller.save = function (req, res) {
-        var _id = req.params._id;
+        let _id = req.params._id;
 
-        var data = {
+        let data = {
             email: req.body.email,
             password: encryption.encrypt(req.body.password),
             fullname: req.body.fullname,
@@ -38,23 +38,23 @@ module.exports = function (app) {
         };
 
         if (_id) {
-            User.findByIdAndUpdate(_id, data, function (err) {
-                if (err) {
+            User.findByIdAndUpdate(_id, { $set: data, $inc: { __v: 1 } }, { "new": true })
+                .then(function (user) {
+                    res.status(200).json(user);
+                })
+                .catch(function (err) {
                     res.status(500).json(err);
-                } else {
-                    res.status(201).end();
-                }
-            });
+                });
         } else {
-            var user = new User(data);
+            let user = new User(data);
 
-            user.save(function (err) {
-                if (err) {
-                    res.status(500).json(err);
-                } else {
+            user.save()
+                .then(function () {
                     res.status(201).json(user);
-                }
-            });
+                })
+                .catch(function (err) {
+                    res.status(500).json(err);
+                });
         }
     };
 

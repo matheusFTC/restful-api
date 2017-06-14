@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/matheusFTC/restful-api#readme",
   "dependencies": {
+    "bluebird": "^3.5.0",
     "body-parser": "^1.17.2",
     "cors": "^2.8.3",
     "express": "^4.15.3",
@@ -30,5 +31,8 @@
   "engines": {
     "node": "6.10.3",
     "npm": "3.10.10"
+  },
+  "devDependencies": {
+    "frisby": "^0.8.5"
   }
 }
