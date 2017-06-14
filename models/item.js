@@ -9,19 +9,10 @@ module.exports = function () {
         description: {
             type: String
         },
-        image: {
-            type: String
-        },
         price: {
             type: Number
-        },
-        items: [
-            {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "Item"
-            }
-        ]
+        }
     });
 
-    return mongoose.model("Product", schema);
+    return mongoose.model("Item", schema);
 };

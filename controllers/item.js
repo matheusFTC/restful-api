@@ -1,14 +1,12 @@
 module.exports = function (app) {
-    let Product = app.models.product;
+    let Item = app.models.item;
 
     let controller = {};
 
     controller.findAll = function (req, res) {
-        Product.find(req.query)
-            .populate("items")
-            .exec()
-            .then(function (products) {
-                res.status(200).json(products);
+        Item.find(req.query)
+            .then(function (items) {
+                res.status(200).json(items);
             })
             .catch(function (err) {
                 res.status(500).json(err);
@@ -16,15 +14,13 @@ module.exports = function (app) {
     };
 
     controller.findById = function (req, res) {
-        Product.findById(req.params._id)
-            .populate("items")
-            .exec()
-            .then(function (product) {
-                if (product) {
-                    res.status(200).json(product);
+        Item.findById(req.params._id)
+            .then(function (item) {
+                if (item) {
+                    res.status(200).json(item);
                 } else {
                     res.status(404).json({
-                        error: "Product not found."
+                        error: "Item not found."
                     });
                 }
             })

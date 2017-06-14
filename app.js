@@ -1,5 +1,5 @@
-var app = require("./configurations/express");
-var mongoose = require("./configurations/mongoose");
+let app = require("./configurations/express");
+let mongoose = require("./configurations/mongoose");
 
 mongoose.connect(app.parameters.database.url, app.parameters.database.options);
 

@@ -1,7 +1,7 @@
-var mongoose = require("mongoose");
+let mongoose = require("mongoose");
 
 module.exports = function () {
-    var schema = mongoose.Schema({
+    let schema = mongoose.Schema({
         email: {
             type: String,
             required: true,

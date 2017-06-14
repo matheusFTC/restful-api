@@ -1,5 +1,5 @@
-var mongoose = require("mongoose");
-var bluebird = require("bluebird");
+let mongoose = require("mongoose");
+let bluebird = require("bluebird");
 
 mongoose.Promise = bluebird;
 
