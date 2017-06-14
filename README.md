@@ -12,10 +12,17 @@ What things you need to install...
 3. MongoDB (^3.2.11) - https://www.mongodb.com/
 4. Bower (^1.7.7) - https://bower.io/
 
-#### Installing
+### Installing
 A step by step
 
 1. git clone to download the sources for this repository;
 2. go to into project folder and run the npm install command;
 3. go to into folder app/parameters and set the values for authentication, database, encryption and infrastructure;
 4. go to into project root folder and run npm start command.
+
+## Routes
+The following routes are available:
+
+### Authentication
+#### /authentication
+Route for user authentication. Use POST HTTP method.
