@@ -35,7 +35,7 @@ module.exports = function () {
         birth: {
             type: Date
         },
-        adresses: [{
+        addresses: [{
             label: {
                 type: String,
                 required: true

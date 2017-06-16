@@ -34,7 +34,7 @@ module.exports = function (app) {
             phone: req.body.phone,
             gender: req.body.gender,
             birth: req.body.birth,
-            adresses: req.body.adresses
+            addresses: req.body.addresses
         };
 
         if (_id) {
