@@ -18,10 +18,7 @@ module.exports = function () {
             required: true
         },
         nif: {
-            type: String,
-            index: {
-                unique: true
-            }
+            type: String
         },
         phone: {
             type: String,
@@ -29,7 +26,6 @@ module.exports = function () {
         },
         gender: {
             type: String,
-            required: true,
             enum: ["M", "F"]
         },
         birth: {
