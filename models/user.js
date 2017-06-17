@@ -14,8 +14,7 @@ module.exports = function () {
             required: true
         },
         fullname: {
-            type: String,
-            required: true
+            type: String
         },
         nif: {
             type: String
