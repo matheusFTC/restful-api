@@ -19,12 +19,12 @@ let directory = path.join("./", "logs");
 
 if (fs.existsSync(directory) === false) fs.mkdirSync(directory);
 
-var stream = rfs("access.log", {
-    interval: "1d",
-    path: directory
-});
-
-app.use(morgan("common", { stream: stream }));
+app.use(morgan(":remote-addr :method :url :status :response-time ms :date[web]", {
+    stream: rfs("access.log", {
+        interval: "1d",
+        path: directory
+    })
+}));
 
 app.disable("x-powered-by");
 
