@@ -3,8 +3,10 @@ module.exports = function (app) {
     let validate = app.controllers.authentication.validate;
 
     app.route("/orders")
-        .get(validate, controller.findAll);
+        .get(validate, controller.findAll)
+        .post(validate, controller.save);;
 
     app.route("/orders/:_id")
-        .get(validate, controller.findById);
+        .get(validate, controller.findById)
+        .put(validate, controller.save);
 };

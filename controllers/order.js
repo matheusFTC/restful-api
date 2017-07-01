@@ -39,5 +39,38 @@ module.exports = function (app) {
             });
     };
 
+    controller.save = function (req, res) {
+        let _id = req.params._id;
+
+        let data = {
+            user: req.body.user,
+            inclusion: req.body.inclusion,
+            finalization: req.body.finalization,
+            status: req.body.status,
+            satisfaction: req.body.satisfaction,
+            items: req.body.items
+        };
+
+        if (_id) {
+            Order.findByIdAndUpdate(_id, { $set: data, $inc: { __v: 1 } }, { "new": true })
+                .then(function (order) {
+                    res.status(200).json(order);
+                })
+                .catch(function (err) {
+                    res.status(500).json(err);
+                });
+        } else {
+            let order = new Order(data);
+
+            order.save()
+                .then(function () {
+                    res.status(201).json(order);
+                })
+                .catch(function (err) {
+                    res.status(500).json(err);
+                });
+        }
+    };
+
     return controller;
 };
