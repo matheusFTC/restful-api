@@ -3,10 +3,6 @@ let cors = require("cors");
 let express = require("express");
 let load = require("express-load");
 let methodOverride = require("method-override");
-let fs = require("fs")
-let path = require("path")
-let rfs = require("rotating-file-stream");
-let morgan = require("morgan");
 
 let app = express();
 
@@ -14,17 +10,6 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(methodOverride());
-
-let directory = path.join("./", "logs");
-
-if (fs.existsSync(directory) === false) fs.mkdirSync(directory);
-
-app.use(morgan(":remote-addr :method :url :status :response-time ms :date[web]", {
-    stream: rfs("access.log", {
-        interval: "1d",
-        path: directory
-    })
-}));
 
 app.disable("x-powered-by");
 
