@@ -1,28 +1,29 @@
 # restful-api
-RESTful API Using Node and Express 4
+RESTful API usando Node.js and Express 4
 
-## Getting Started
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+## Resumo
+Este projeto foi desenvolvido para a disciplina de Criação de Aplicações Web Apps, da pós-graduação em DESIGN WEB APPS COM TECNOLOGIA FRONT-END, no INSTITUTO BRASILEIRO DE EXPERTISE PROFISSIONAL.
 
-### Prerequisites
-What things you need to install...
+Serão passadas aqui instruções que permitirão obter uma cópia do projeto e executar o mesmo.
+
+### Pré-requisitos
+O que você precisa para instalar e rodar o projeto:
 
 1. Git (^2.8.1) - https://git-scm.com/
-2. Node.js (^6.9.4) and NPM (^3.10.10) - https://nodejs.org/
+2. Node.js (^6.9.4) e NPM (^3.10.10) - https://nodejs.org/
 3. MongoDB (^3.2.11) - https://www.mongodb.com/
-4. Bower (^1.7.7) - https://bower.io/
 
-### Installing
-A step by step
+### Instalando
+Um passo a passo
 
-1. git clone to download the sources for this repository;
-2. go to into project folder and run the npm install command;
-3. go to into folder app/parameters and set the values for authentication, database, encryption and infrastructure;
-4. go to into project root folder and run npm start command.
+1. Execute o comando git clone para download dos fontes deste repositório;
+2. Vá para a pasta do projeto e execute o comando npm install;
+3. Vá para a pasta parameters and atribua os valores de configuração desejados para os arquivos authentication.js, database.js, encryption.js e infrastructure.js;
+4. Vá para a pasta raiz do projeto e execute o comando npm start.
 
-## Routes
-The following routes are available:
+### Rotas
+As seguintes rotas estão disponíveis:
 
-### Authentication
-#### /authentication
-Route for user authentication. Use POST HTTP method.
+#### Authentication
+##### /authentication
+Rota para autenticação de usuários. Use o método HTTP POST, passando no body da requisição o email e a senha do usuário. Como resposta, para uma autenticação bem sucedida, será retornado o token de acesso.
