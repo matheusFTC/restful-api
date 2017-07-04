@@ -24,6 +24,13 @@ Um passo a passo
 ### Rotas
 As seguintes rotas estão disponíveis:
 
-#### Authentication
+#### Autenticação
 ##### /authentication
 Rota para autenticação de usuários. Use o método HTTP POST, passando no body da requisição o email e a senha do usuário. Como resposta, para uma autenticação bem sucedida, será retornado o token de acesso.
+
+#### Produtos
+##### /products
+Rota para listagem dos produtos. Use o método HTTP GET. Não é necessário passar token da acesso.
+
+##### /products/{_id}
+Rota para consulta de um produto específico. Use o método HTTP GET. Não é necessário passar token da acesso.
