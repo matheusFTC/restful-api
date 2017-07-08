@@ -34,3 +34,10 @@ Rota para listagem dos produtos. Use o método HTTP GET. Não é necessário pas
 
 ##### /products/{_id}
 Rota para consulta de um produto específico. Use o método HTTP GET. Não é necessário passar token da acesso.
+
+#### Itens
+##### /items
+Rota para listagem dos itens que formam alguns produtos. Use o método HTTP GET. Não é necessário passar token da acesso.
+
+##### /items/{_id}
+Rota para consulta de um item de produto específico. Use o método HTTP GET. Não é necessário passar token da acesso.
