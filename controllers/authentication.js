@@ -27,7 +27,8 @@ module.exports = function (app) {
 
                 res.status(200).json({
                     token: token,
-                    expires: expires
+                    expires: expires,
+                    user: user
                 });
             } else {
                 res.status(401).json({
