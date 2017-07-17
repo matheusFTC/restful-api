@@ -16,7 +16,7 @@ module.exports = function (app) {
                 });
         } else {
             res.status(404).json({
-                error: "It is necessary to provide the user."
+                error: "You must provide a filter user for the query."
             });
         }
     };
