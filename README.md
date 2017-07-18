@@ -21,6 +21,11 @@ Um passo a passo
 3. Vá para a pasta parameters and atribua os valores de configuração desejados para os arquivos authentication.js, database.js, encryption.js e infrastructure.js;
 4. Vá para a pasta raiz do projeto e execute o comando npm start.
 
+### API no Heroku
+Para facilitar, a API foi hospedada no Hiroku
+
+Você também pode testar e usar esta API por meio da URL: https://restful-api-dwa.herokuapp.com.
+
 ### Rotas
 As seguintes rotas estão disponíveis:
 
