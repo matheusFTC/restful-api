@@ -28,7 +28,7 @@ module.exports = function () {
             enum: ["M", "F"]
         },
         birth: {
-            type: Date
+            type: String
         },
         addresses: [{
             label: {
