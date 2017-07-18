@@ -37,12 +37,16 @@ Rota para autenticação de usuários. Use o método HTTP POST, passando no body
 ##### /products
 Rota para listagem dos produtos. Use o método HTTP GET. Não é necessário passar token da acesso.
 
+Você pode testar com a seguinte URL: https://restful-api-dwa.herokuapp.com/products.
+
 ##### /products/{_id}
 Rota para consulta de um produto específico. Use o método HTTP GET. Não é necessário passar token da acesso.
 
 #### Itens
 ##### /items
 Rota para listagem dos itens que formam alguns produtos. Use o método HTTP GET. Não é necessário passar token da acesso.
+
+Você pode testar com a seguinte URL: https://restful-api-dwa.herokuapp.com/items.
 
 ##### /items/{_id}
 Rota para consulta de um item de produto específico. Use o método HTTP GET. Não é necessário passar token da acesso.
