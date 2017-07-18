@@ -14,7 +14,7 @@ O que você precisa para instalar e rodar o projeto:
 3. MongoDB (^3.2.11) - https://www.mongodb.com/
 
 ### Instalando
-Um passo a passo
+Um passo a passo...
 
 1. Execute o comando git clone para download dos fontes deste repositório;
 2. Vá para a pasta do projeto e execute o comando npm install;
@@ -22,7 +22,7 @@ Um passo a passo
 4. Vá para a pasta raiz do projeto e execute o comando npm start.
 
 ### API no Heroku
-Para facilitar, a API foi hospedada no Hiroku
+Para facilitar, a API foi hospedada no Hiroku.
 
 Você também pode testar e usar esta API por meio da URL: https://restful-api-dwa.herokuapp.com.
 
