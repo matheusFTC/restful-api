@@ -28,7 +28,6 @@ module.exports = function (app) {
 
         let data = {
             email: req.body.email,
-            password: encryption.encrypt(req.body.password),
             fullname: req.body.fullname,
             nif: req.body.nif,
             phone: req.body.phone,
@@ -38,14 +37,51 @@ module.exports = function (app) {
         };
 
         if (_id) {
-            User.findByIdAndUpdate(_id, { $set: data, $inc: { __v: 1 } }, { "new": true })
+            User.findById(_id)
                 .then(function (user) {
-                    res.status(200).json(user);
+                    if (user) {
+                        let password = encryption.encrypt(req.body.password);
+                        let newPassword = encryption.encrypt(req.body.newPassword);
+                        let newPasswordConfirm = encryption.encrypt(req.body.newPasswordConfirm);
+
+                        if (user.password !== password) {
+                            res.status(401).json({
+                                error: "Unauthorized."
+                            });
+                        } else {
+                            if (newPassword || newPasswordConfirm) {
+                                if (newPassword === newPasswordConfirm) {
+                                    data.password = newPassword;
+                                } else {
+                                    res.status(403).json({
+                                        error: "The passwords you entered for change are not the same."
+                                    });
+                                }
+                            } else {
+                                data.password = password;
+                            }
+
+                            if (data.password)
+                                User.findByIdAndUpdate(_id, { $set: data, $inc: { __v: 1 } }, { "new": true })
+                                    .then(function (user) {
+                                        res.status(200).json(user);
+                                    })
+                                    .catch(function (err) {
+                                        res.status(500).json(err);
+                                    });
+                        }
+                    } else {
+                        res.status(404).json({
+                            error: "User not found."
+                        });
+                    }
                 })
                 .catch(function (err) {
                     res.status(500).json(err);
                 });
         } else {
+            data.password = encryption.encrypt(req.body.password);
+
             let user = new User(data);
 
             user.save()
