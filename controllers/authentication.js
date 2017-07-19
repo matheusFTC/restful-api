@@ -16,28 +16,30 @@ module.exports = function (app) {
         User.findOne({
             "email": req.body.email,
             "password": encryption.encrypt(req.body.password)
-        }).then(function (user) {
-            if (user) {
-                let expires = moment().add(amount, duration).valueOf();
+        }).populate("adresses")
+            .exec()
+            .then(function (user) {
+                if (user) {
+                    let expires = moment().add(amount, duration).valueOf();
 
-                let token = jwt.encode({
-                    iss: user._id,
-                    exp: expires
-                }, secret);
+                    let token = jwt.encode({
+                        iss: user._id,
+                        exp: expires
+                    }, secret);
 
-                res.status(200).json({
-                    token: token,
-                    expires: expires,
-                    user: user
-                });
-            } else {
-                res.status(401).json({
-                    error: "Unauthorized."
-                });
-            }
-        }).catch(function (err) {
-            res.status(500).json(err);
-        });
+                    res.status(200).json({
+                        token: token,
+                        expires: expires,
+                        user: user
+                    });
+                } else {
+                    res.status(401).json({
+                        error: "Unauthorized."
+                    });
+                }
+            }).catch(function (err) {
+                res.status(500).json(err);
+            });
     };
 
     controller.validate = function (req, res, next) {

@@ -36,6 +36,14 @@ module.exports = function (app) {
             addresses: req.body.addresses
         };
 
+        if (data.addresses) {
+            data.addresses = data.addresses.filter(function (address) {
+                return address !== null;
+            });
+        } else {
+            data.addresses = null;
+        }
+
         if (_id) {
             User.findById(_id)
                 .then(function (user) {
