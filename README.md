@@ -6,6 +6,8 @@ Este projeto foi desenvolvido para a disciplina de Criação de Aplicações Web
 
 Serão passadas aqui instruções que permitirão obter uma cópia do projeto e executar o mesmo.
 
+## Como Usar
+
 ### Pré-requisitos
 O que você precisa para instalar e rodar o projeto:
 
@@ -50,3 +52,6 @@ Você pode testar com a seguinte URL: https://restful-api-dwa.herokuapp.com/item
 
 ##### /items/{_id}
 Rota para consulta de um item de produto específico. Use o método HTTP GET. Não é necessário passar token da acesso.
+
+## Licença
+MIT License (MIT).
