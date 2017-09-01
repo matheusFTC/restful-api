@@ -2,7 +2,7 @@
 RESTful API usando Node.js and Express 4
 
 ## Resumo
-Este projeto foi desenvolvido para a disciplina de Criação de Aplicações Web Apps, da pós-graduação em DESIGN WEB APPS COM TECNOLOGIA FRONT-END, no INSTITUTO BRASILEIRO DE EXPERTISE PROFISSIONAL.
+Este projeto foi desenvolvido para as disciplinas de Criação de Aplicações Web Apps e Tec. Server-side com Node.js, da pós-graduação em DESIGN WEB APPS COM TECNOLOGIA FRONT-END, no INSTITUTO BRASILEIRO DE EXPERTISE PROFISSIONAL.
 
 Serão passadas aqui instruções que permitirão obter uma cópia do projeto e executar o mesmo.
 
@@ -24,7 +24,7 @@ Um passo a passo...
 4. Vá para a pasta raiz do projeto e execute o comando npm start.
 
 ### API no Heroku
-Para facilitar, a API foi hospedada no Hiroku.
+Para facilitar, a API foi hospedada no Heroku.
 
 Você também pode testar e usar esta API por meio da URL: https://restful-api-dwa.herokuapp.com.
 
