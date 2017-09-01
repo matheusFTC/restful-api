@@ -1,5 +1,5 @@
-module.exports = function() {
-  return {
-    port: 80
-  };
+module.exports = function (app) {
+    return {
+        port: 80
+    };
 };
