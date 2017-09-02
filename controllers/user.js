@@ -1,15 +1,15 @@
-module.exports = function (app) {
+module.exports = (app) => {
     let encryption = app.utils.encryption;
 
     let User = app.models.user;
 
     let controller = {};
 
-    controller.findById = function (req, res) {
+    controller.findById = (req, res) => {
         User.findById(req.params._id)
             .populate("adresses")
             .exec()
-            .then(function (user) {
+            .then((user) => {
                 if (user) {
                     res.status(200).json(user);
                 } else {
@@ -18,12 +18,12 @@ module.exports = function (app) {
                     });
                 }
             })
-            .catch(function (err) {
+            .catch((err) => {
                 res.status(500).json(err);
             });
     };
 
-    controller.save = function (req, res) {
+    controller.save = (req, res) => {
         let _id = req.params._id;
 
         let data = {
@@ -37,7 +37,7 @@ module.exports = function (app) {
         };
 
         if (data.addresses) {
-            data.addresses = data.addresses.filter(function (address) {
+            data.addresses = data.addresses.filter((address) => {
                 return address !== null;
             });
         } else {
@@ -46,7 +46,7 @@ module.exports = function (app) {
 
         if (_id) {
             User.findById(_id)
-                .then(function (user) {
+                .then((user) => {
                     if (user) {
                         let password = encryption.encrypt(req.body.password);
                         let newPassword = encryption.encrypt(req.body.newPassword);
@@ -71,10 +71,10 @@ module.exports = function (app) {
 
                             if (data.password)
                                 User.findByIdAndUpdate(_id, { $set: data, $inc: { __v: 1 } }, { "new": true })
-                                    .then(function (user) {
+                                    .then((user) => {
                                         res.status(200).json(user);
                                     })
-                                    .catch(function (err) {
+                                    .catch((err) => {
                                         res.status(500).json(err);
                                     });
                         }
@@ -84,7 +84,7 @@ module.exports = function (app) {
                         });
                     }
                 })
-                .catch(function (err) {
+                .catch((err) => {
                     res.status(500).json(err);
                 });
         } else {
@@ -93,10 +93,10 @@ module.exports = function (app) {
             let user = new User(data);
 
             user.save()
-                .then(function () {
+                .then(() => {
                     res.status(201).json(user);
                 })
-                .catch(function (err) {
+                .catch((err) => {
                     res.status(500).json(err);
                 });
         }

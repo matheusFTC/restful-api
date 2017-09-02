@@ -1,6 +1,6 @@
 let mongoose = require("mongoose");
 
-module.exports = function () {
+module.exports = () => {
     let schema = mongoose.Schema({
         email: {
             type: String,
@@ -53,10 +53,25 @@ module.exports = function () {
             reference: {
                 type: String
             },
+            neighborhood: {
+                type: String
+            },
+            city: {
+                type: String
+            },
+            state: {
+                type: String
+            },
+            country: {
+                type: String
+            },
             latLon: {
                 type: String
             }
-        }]
+        }],
+        token: {
+            type: String
+        }
     });
 
     return mongoose.model("User", schema);

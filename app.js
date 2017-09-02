@@ -3,8 +3,8 @@ let mongoose = require("./configurations/mongoose");
 
 mongoose.connect(app.parameters.database.url, app.parameters.database.options);
 
-process.on("SIGINT", function () {
-    mongoose.connection.close(function () {
+process.on("SIGINT", () => {
+    mongoose.connection.close(() => {
         process.exit(0);
     });
 });

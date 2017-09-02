@@ -1,4 +1,4 @@
-module.exports = function (app) {
+module.exports = (app) => {
     let controller = app.controllers.user;
     let validate = app.controllers.authentication.validate;
 
