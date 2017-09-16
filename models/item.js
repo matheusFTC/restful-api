@@ -1,6 +1,6 @@
 let mongoose = require("mongoose");
 
-module.exports = function () {
+module.exports = () => {
     let schema = mongoose.Schema({
         name: {
             type: String,

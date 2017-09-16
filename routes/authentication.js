@@ -1,6 +1,6 @@
-module.exports = function (app) {
+module.exports = (app) => {
     let controller = app.controllers.authentication;
 
     app.route("/authentication")
-        .post(controller.authenticate);
+        .post(logger, controller.authenticate);
 };
