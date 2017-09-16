@@ -1,9 +1,10 @@
-module.exports = function (app) {
+module.exports = (app) => {
     let controller = app.controllers.product;
+    let logger = app.utils.logger.access;
 
     app.route("/products")
-        .get(controller.findAll);
+        .get(logger, controller.findAll);
 
     app.route("/products/:_id")
-        .get(controller.findById);
+        .get(logger, controller.findById);
 };
