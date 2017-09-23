@@ -1,7 +1,7 @@
 let jwt = require("jwt-simple");
 let moment = require("moment");
 
-module.exports = function (app) {
+module.exports = (app) => {
     const secret = app.parameters.authentication.secret;
     const amount = app.parameters.authentication.amount;
     const duration = app.parameters.authentication.duration;
@@ -12,13 +12,13 @@ module.exports = function (app) {
 
     let controller = {};
 
-    controller.authenticate = function (req, res) {
+    controller.authenticate = (req, res) => {
         User.findOne({
             "email": req.body.email,
             "password": encryption.encrypt(req.body.password)
         }).populate("adresses")
             .exec()
-            .then(function (user) {
+            .then((user) => {
                 if (user) {
                     let expires = moment().add(amount, duration).valueOf();
 
@@ -27,22 +27,29 @@ module.exports = function (app) {
                         exp: expires
                     }, secret);
 
-                    res.status(200).json({
-                        token: token,
-                        expires: expires,
-                        user: user
+                    user.set({ token: token });
+
+                    user.save((err, user) => {
+                        if (err) {
+                            res.status(500).json(err);
+                        } else {
+                            res.status(200).json({
+                                expires: expires,
+                                user: user
+                            });
+                        }
                     });
                 } else {
                     res.status(401).json({
                         error: "Unauthorized."
                     });
                 }
-            }).catch(function (err) {
+            }).catch((err) => {
                 res.status(500).json(err);
             });
     };
 
-    controller.validate = function (req, res, next) {
+    controller.validate = (req, res, next) => {
         let token = req.body.token || req.query.token || req.headers["x-access-token"];
 
         if (token) {
@@ -56,15 +63,15 @@ module.exports = function (app) {
                 } else {
                     User.findById({
                         "_id": decoded.iss
-                    }).then(function (user) {
-                        if (user) {
+                    }).then((user) => {
+                        if (user && user.token === token) {
                             next();
                         } else {
                             res.status(401).json({
                                 error: "Unauthorized."
                             });
                         }
-                    }).catch(function (err) {
+                    }).catch((err) => {
                         res.status(500).json(err);
                     });
                 }
